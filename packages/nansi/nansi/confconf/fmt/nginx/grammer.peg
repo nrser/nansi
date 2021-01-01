@@ -1,0 +1,5 @@
+grammar Nginx
+  __ <- [\s]*
+  comment <- "#" [^\n]*
+  simple_directive <- 
+  
