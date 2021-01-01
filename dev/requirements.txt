@@ -4,3 +4,6 @@
 # Building Python packages
 setuptools>=49.2.0,<50
 wheel>=0.34.2,<0.35
+
+# Try out Nginx config parser
+crossplane

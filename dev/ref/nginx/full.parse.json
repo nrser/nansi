@@ -1,0 +1,386 @@
+{
+    "status": "failed",
+    "errors": [
+        {
+            "file": "vendor/nansi/tmp/full.nginx.conf",
+            "error": "[Errno 2] No such file or directory: 'vendor/nansi/tmp/conf/mime.types'",
+            "line": 17
+        },
+        {
+            "file": "vendor/nansi/tmp/full.nginx.conf",
+            "error": "[Errno 2] No such file or directory: '/etc/nginx/proxy.conf'",
+            "line": 18
+        },
+        {
+            "file": "vendor/nansi/tmp/full.nginx.conf",
+            "error": "[Errno 2] No such file or directory: '/etc/nginx/fastcgi.conf'",
+            "line": 19
+        }
+    ],
+    "config": [
+        {
+            "file": "vendor/nansi/tmp/full.nginx.conf",
+            "status": "failed",
+            "errors": [
+                {
+                    "error": "[Errno 2] No such file or directory: 'vendor/nansi/tmp/conf/mime.types'",
+                    "line": 17
+                },
+                {
+                    "error": "[Errno 2] No such file or directory: '/etc/nginx/proxy.conf'",
+                    "line": 18
+                },
+                {
+                    "error": "[Errno 2] No such file or directory: '/etc/nginx/fastcgi.conf'",
+                    "line": 19
+                }
+            ],
+            "parsed": [
+                {
+                    "directive": "user",
+                    "line": 6,
+                    "args": [
+                        "www",
+                        "www"
+                    ]
+                },
+                {
+                    "directive": "worker_processes",
+                    "line": 7,
+                    "args": [
+                        "5"
+                    ]
+                },
+                {
+                    "directive": "error_log",
+                    "line": 8,
+                    "args": [
+                        "logs/error.log"
+                    ]
+                },
+                {
+                    "directive": "pid",
+                    "line": 9,
+                    "args": [
+                        "logs/nginx.pid"
+                    ]
+                },
+                {
+                    "directive": "worker_rlimit_nofile",
+                    "line": 10,
+                    "args": [
+                        "8192"
+                    ]
+                },
+                {
+                    "directive": "events",
+                    "line": 12,
+                    "args": [],
+                    "block": [
+                        {
+                            "directive": "worker_connections",
+                            "line": 13,
+                            "args": [
+                                "4096"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "directive": "http",
+                    "line": 16,
+                    "args": [],
+                    "block": [
+                        {
+                            "directive": "include",
+                            "line": 17,
+                            "args": [
+                                "conf/mime.types"
+                            ],
+                            "includes": []
+                        },
+                        {
+                            "directive": "include",
+                            "line": 18,
+                            "args": [
+                                "/etc/nginx/proxy.conf"
+                            ],
+                            "includes": []
+                        },
+                        {
+                            "directive": "include",
+                            "line": 19,
+                            "args": [
+                                "/etc/nginx/fastcgi.conf"
+                            ],
+                            "includes": []
+                        },
+                        {
+                            "directive": "index",
+                            "line": 20,
+                            "args": [
+                                "index.html",
+                                "index.htm",
+                                "index.php"
+                            ]
+                        },
+                        {
+                            "directive": "default_type",
+                            "line": 22,
+                            "args": [
+                                "application/octet-stream"
+                            ]
+                        },
+                        {
+                            "directive": "log_format",
+                            "line": 23,
+                            "args": [
+                                "main",
+                                "$remote_addr - $remote_user [$time_local]  $status ",
+                                "\"$request\" $body_bytes_sent \"$http_referer\" ",
+                                "\"$http_user_agent\" \"$http_x_forwarded_for\""
+                            ]
+                        },
+                        {
+                            "directive": "access_log",
+                            "line": 26,
+                            "args": [
+                                "logs/access.log",
+                                "main"
+                            ]
+                        },
+                        {
+                            "directive": "sendfile",
+                            "line": 27,
+                            "args": [
+                                "on"
+                            ]
+                        },
+                        {
+                            "directive": "tcp_nopush",
+                            "line": 28,
+                            "args": [
+                                "on"
+                            ]
+                        },
+                        {
+                            "directive": "server_names_hash_bucket_size",
+                            "line": 29,
+                            "args": [
+                                "128"
+                            ]
+                        },
+                        {
+                            "directive": "server",
+                            "line": 31,
+                            "args": [],
+                            "block": [
+                                {
+                                    "directive": "listen",
+                                    "line": 32,
+                                    "args": [
+                                        "80"
+                                    ]
+                                },
+                                {
+                                    "directive": "server_name",
+                                    "line": 33,
+                                    "args": [
+                                        "domain1.com",
+                                        "www.domain1.com"
+                                    ]
+                                },
+                                {
+                                    "directive": "access_log",
+                                    "line": 34,
+                                    "args": [
+                                        "logs/domain1.access.log",
+                                        "main"
+                                    ]
+                                },
+                                {
+                                    "directive": "root",
+                                    "line": 35,
+                                    "args": [
+                                        "html"
+                                    ]
+                                },
+                                {
+                                    "directive": "location",
+                                    "line": 37,
+                                    "args": [
+                                        "~",
+                                        "\\.php$"
+                                    ],
+                                    "block": [
+                                        {
+                                            "directive": "fastcgi_pass",
+                                            "line": 38,
+                                            "args": [
+                                                "127.0.0.1:1025"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "directive": "server",
+                            "line": 42,
+                            "args": [],
+                            "block": [
+                                {
+                                    "directive": "listen",
+                                    "line": 43,
+                                    "args": [
+                                        "80"
+                                    ]
+                                },
+                                {
+                                    "directive": "server_name",
+                                    "line": 44,
+                                    "args": [
+                                        "domain2.com",
+                                        "www.domain2.com"
+                                    ]
+                                },
+                                {
+                                    "directive": "access_log",
+                                    "line": 45,
+                                    "args": [
+                                        "logs/domain2.access.log",
+                                        "main"
+                                    ]
+                                },
+                                {
+                                    "directive": "location",
+                                    "line": 48,
+                                    "args": [
+                                        "~",
+                                        "^/(images|javascript|js|css|flash|media|static)/"
+                                    ],
+                                    "block": [
+                                        {
+                                            "directive": "root",
+                                            "line": 49,
+                                            "args": [
+                                                "/var/www/virtual/big.server.com/htdocs"
+                                            ]
+                                        },
+                                        {
+                                            "directive": "expires",
+                                            "line": 50,
+                                            "args": [
+                                                "30d"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "directive": "location",
+                                    "line": 54,
+                                    "args": [
+                                        "/"
+                                    ],
+                                    "block": [
+                                        {
+                                            "directive": "proxy_pass",
+                                            "line": 55,
+                                            "args": [
+                                                "http://127.0.0.1:8080"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "directive": "upstream",
+                            "line": 59,
+                            "args": [
+                                "big_server_com"
+                            ],
+                            "block": [
+                                {
+                                    "directive": "server",
+                                    "line": 60,
+                                    "args": [
+                                        "127.0.0.3:8000",
+                                        "weight=5"
+                                    ]
+                                },
+                                {
+                                    "directive": "server",
+                                    "line": 61,
+                                    "args": [
+                                        "127.0.0.3:8001",
+                                        "weight=5"
+                                    ]
+                                },
+                                {
+                                    "directive": "server",
+                                    "line": 62,
+                                    "args": [
+                                        "192.168.0.1:8000"
+                                    ]
+                                },
+                                {
+                                    "directive": "server",
+                                    "line": 63,
+                                    "args": [
+                                        "192.168.0.1:8001"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "directive": "server",
+                            "line": 66,
+                            "args": [],
+                            "block": [
+                                {
+                                    "directive": "listen",
+                                    "line": 67,
+                                    "args": [
+                                        "80"
+                                    ]
+                                },
+                                {
+                                    "directive": "server_name",
+                                    "line": 68,
+                                    "args": [
+                                        "big.server.com"
+                                    ]
+                                },
+                                {
+                                    "directive": "access_log",
+                                    "line": 69,
+                                    "args": [
+                                        "logs/big.server.access.log",
+                                        "main"
+                                    ]
+                                },
+                                {
+                                    "directive": "location",
+                                    "line": 71,
+                                    "args": [
+                                        "/"
+                                    ],
+                                    "block": [
+                                        {
+                                            "directive": "proxy_pass",
+                                            "line": 72,
+                                            "args": [
+                                                "http://big_server_com"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
