@@ -1,14 +1,5 @@
 {
   "python.formatting.provider": "black",
-  "python.pythonPath": "/Users/nrser/.pyenv/versions/bogart/bin/python",
+  "python.pythonPath": "${env:HOME}/.pyenv/versions/nrser-nansi/bin/python",
   "python.linting.pylintEnabled": true,
-  "python.analysis.extraPaths": [
-    "${workspaceFolder}/plugins/action",
-  ],
-  "python.autoComplete.extraPaths": [
-    "${workspaceFolder}/plugins/action",
-  ],
-  "cSpell.words": [
-    "genpsk"
-  ]
 }

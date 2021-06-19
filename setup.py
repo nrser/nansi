@@ -22,6 +22,6 @@ setuptools.setup(
     install_requires=[
         'ansible>=2.9.4,<3',
         'typeguard>=2.9.1,<3',
-        'rich>=9.13.0,<10',
+        'splatlog>=0.1.0',
     ],
 )
