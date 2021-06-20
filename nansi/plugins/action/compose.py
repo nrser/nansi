@@ -1,6 +1,5 @@
 from __future__ import annotations
 from abc import abstractmethod
-from nansi.logging import ANSIBLE_COLLECTIONS_LOGGER_NAME
 from typing import Dict, Optional
 
 from ansible.plugins.action import ActionBase

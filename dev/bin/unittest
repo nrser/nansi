@@ -2,8 +2,4 @@
 
 echo "### Unit-testing nansi... ###"
 echo
-python -m unittest discover --verbose ./packages/nansi/tests/
-echo 
-echo "### Unit-testing wgconf... ###"
-echo 
-python -m unittest discover --verbose ./packages/wgconf/tests/
+python -m unittest discover --verbose ./tests/
