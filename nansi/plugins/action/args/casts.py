@@ -4,7 +4,7 @@ from pathlib import Path
 from nansi.utils import doctesting
 from nansi.utils.casting import CastError, map_cast
 from nansi.utils import text
-from nansi import logging
+import splatlog as logging
 from nansi.utils.typings import is_optional
 
 from .base import ArgsBase

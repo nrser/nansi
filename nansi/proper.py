@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 
 from typeguard import check_type
 
-from nansi import logging
+import splatlog as logging
 
 # pylint: disable=redefined-builtin,invalid-name
 

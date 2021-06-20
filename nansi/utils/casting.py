@@ -10,6 +10,8 @@ from typing import (
     Type,
 )
 
+import splatlog as logging
+
 from nansi.utils.typings import (
     each_member_type,
     get_root_type,
@@ -17,7 +19,6 @@ from nansi.utils.typings import (
     get_args,
 )
 from nansi.utils.strings import coord
-from nansi import logging
 from nansi.utils import doctesting
 
 

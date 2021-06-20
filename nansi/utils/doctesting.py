@@ -3,10 +3,13 @@ import sys
 from tempfile import TemporaryDirectory
 from typing import Any, Callable, Mapping, Optional
 
+import splatlog as logging
+
 from ansible.template import Templar
 from ansible.parsing.dataloader import DataLoader
 
-from nansi import logging
+from nansi.constants import ROOT_LOGGER_NAMES
+
 
 def template(
     expr: str,
@@ -77,7 +80,7 @@ def testmod(mod_name: str):
     else:
         level = logging.INFO
 
-    logging.setup(level=level)
+    logging.setup(module_names=ROOT_LOGGER_NAMES, level=level)
 
     # We want the module ref itself so we can touch it inappropriately
     mod = sys.modules[mod_name]

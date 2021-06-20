@@ -3,8 +3,8 @@ import re
 import os
 
 from rich.table import Table
+import splatlog as logging
 
-from nansi import logging
 from nansi.utils.collections import dig, flatten, filtered
 
 TAnsibleFacts = Mapping[str, Any]
@@ -468,6 +468,8 @@ def os_file_resolve(
 
 
 if __name__ == "__main__":
+    # Imports down here are used in doctest, which pylint doesn't pick up
+    # pylint: disable=unused-import
     import doctest
     from nansi.utils.doctesting import temp_paths
 

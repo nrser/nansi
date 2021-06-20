@@ -11,12 +11,9 @@ from typing import (
 
 from nansi.proper import Prop
 from nansi.utils import doctesting
-from nansi import logging
 
 from .base import ArgsBase
 
-
-LOG = logging.getLogger(__name__)
 
 TValue = TypeVar("TValue")
 TInput = TypeVar("TInput")

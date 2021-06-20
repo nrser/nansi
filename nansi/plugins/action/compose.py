@@ -1,14 +1,17 @@
 from __future__ import annotations
 from abc import abstractmethod
+from nansi.logging import ANSIBLE_COLLECTIONS_LOGGER_NAME
 from typing import Dict, Optional
 
 from ansible.plugins.action import ActionBase
 from ansible.errors import AnsibleError
 from ansible.playbook.task import Task
 
-from nansi import logging
-from nansi.logging.rich_handler import table
+import splatlog as logging
+from splatlog.rich_handler import table
+
 from nansi.template.var_values import VarValues
+from nansi.constants import ROOT_LOGGER_NAMES
 
 
 LOG = logging.getLogger(__name__)
@@ -126,7 +129,17 @@ class ComposeAction(ActionBase):
         self._result = None
         self._var_values = None
 
-        logging.setup_for_display()
+        logging.setup(
+            module_names=(
+                *ROOT_LOGGER_NAMES,
+
+                # The name of the module that is extending ComposeAction.
+                #
+                # In the case of a single-layer extension, this should work
+                # out how we intend -- logging gets set up for that module.
+                self.__class__.__module__,
+            )
+        )
 
         # self.log = logging.getLogger(
         #     f"{self.__class__.__module__}.{self.__class__.__name__}"
