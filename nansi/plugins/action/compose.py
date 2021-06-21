@@ -68,7 +68,7 @@ class TaskRunner:
         self._task_name = task_name
         self._task_vars = task_vars
 
-    def run(self, _raw_params: Optional[str] = None, **task_args):
+    def __call__(self, _raw_params: Optional[str] = None, **task_args):
         # Allow passing of "raw params" (the thing you're prob seen with
         # `command`, `shell`, `raw`, etc.) positionally, which feels nicer
         if _raw_params is not None:
@@ -78,7 +78,10 @@ class TaskRunner:
             self._task_name, self._task_vars, **task_args
         )
 
-    __call__ = run
+    def __getattr__(self, task_name: str) -> TaskRunner:
+        return TaskRunner(self.__compose_action, task_name)
+
+    __getitem__ = __getattr__
 
     def with_vars(self, **task_vars):
         return self.__class__(
