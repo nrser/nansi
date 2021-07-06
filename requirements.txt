@@ -9,7 +9,8 @@
 
 # Building Python packages
 setuptools>=49.2.0,<50
-wheel>=0.34.2,<0.35
+wheel>=0.34.2,<1
+twine>=3.4.1,<4
 
 # VSCode / formatting stuff
 black==20.8b1 # No idea how this versioning crap works
