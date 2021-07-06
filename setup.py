@@ -5,7 +5,8 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nansi",
-    version="0.1.0",
+    # SEE   https://www.python.org/dev/peps/pep-0440/
+    version="0.1.1a0",
     author="nrser",
     author_email="neil@neilsouza.com",
     description="Nrser ANSIble",
