@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nansi",
-    version="0.0.1",
-    author="NRSER",
+    version="0.1.0",
+    author="nrser",
     author_email="neil@neilsouza.com",
     description="Nrser ANSIble",
     long_description=long_description,
@@ -15,7 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        # "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: BSD License",
         "Operating System :: POSIX",
     ],
     python_requires='>=3.8',
@@ -23,5 +23,12 @@ setuptools.setup(
         'ansible>=2.9.4,<3',
         'typeguard>=2.9.1,<3',
         'splatlog>=0.1.0',
+    ],
+    license = "BSD License",
+    license_files=[
+        "LICENSE",
+    ],
+    platforms = [
+        "POSIX",
     ],
 )
