@@ -1,16 +1,16 @@
 from __future__ import annotations
 from abc import abstractmethod
 from typing import Dict, Optional
+from contextlib import contextmanager
 
 from ansible.plugins.action import ActionBase
 from ansible.errors import AnsibleError
 from ansible.playbook.task import Task
-
 import splatlog as logging
 from splatlog.rich_handler import table
 
 from nansi.template.var_values import VarValues
-from nansi.constants import ROOT_LOGGER_NAMES
+from nansi.utils.logging import setup_for_display
 
 
 LOG = logging.getLogger(__name__)
@@ -79,7 +79,10 @@ class TaskRunner:
         )
 
     def __getattr__(self, task_name: str) -> TaskRunner:
-        return TaskRunner(self.__compose_action, task_name)
+        return TaskRunner(
+            self._compose_action,
+            f"{self._task_name}.{task_name}",
+        )
 
     __getitem__ = __getattr__
 
@@ -120,7 +123,6 @@ class Tasks:
 
     __getitem__ = __getattr__
 
-
 class ComposeAction(ActionBase):
     def __init__(self, *args, **kwds):
         super().__init__(*args, **kwds)
@@ -131,25 +133,25 @@ class ComposeAction(ActionBase):
         self._result = None
         self._var_values = None
 
-        logging.setup(
-            module_names=(
-                *ROOT_LOGGER_NAMES,
-
-                # The name of the module that is extending ComposeAction.
-                #
-                # In the case of a single-layer extension, this should work
-                # out how we intend -- logging gets set up for that module.
-                self.__class__.__module__,
-            )
-        )
-
-        # self.log = logging.getLogger(
-        #     f"{self.__class__.__module__}.{self.__class__.__name__}"
-        # )
-
         self.log = logging.getLogger(
-            f"nrser.nansi.{self.__class__.__module__.split('.')[-1]}"
+            # f"nrser.nansi.{self.__class__.__module__.split('.')[-1]}"
+            # The name of the module that is extending ComposeAction.
+            #
+            # For an action plugin in a collection, this will take the form:
+            #
+            #   ansible_collections.${NAMESPACE}.${NAME}.plugins.action.${ACTION}
+            #
+            # like:
+            #
+            #   ansible_collections.experf.ue_build_driver.plugins.action.setup
+            #
+            self.__class__.__module__,
         )
+
+        # Setup logging output, using the `verbosity` attribute of
+        # `ansible.utils.display.Display` to set the level (verbosity is
+        # set by the `-vv` switches provided to the `ansible-playbook` command)
+        setup_for_display(self.log.name)
 
     # This is really just so that pylint shuts up about it's use in TaskRunner
     @property
@@ -289,7 +291,7 @@ class ComposeAction(ActionBase):
     def run(self, tmp=None, task_vars=None):
         self.log.debug(
             "Starting task composition...",
-            extra={"data": {"args": table(self._task.args)}}
+            extra={"data": {"args": table(self._task.args)}},
         )
 
         self._result = super().run(tmp, task_vars)
@@ -356,8 +358,7 @@ class ComposeAction(ActionBase):
 
         if action is None:
             self.log.debug(
-                f"Composing task `{name}`",
-                extra={"data": {"args": task_args}}
+                f"Composing task `{name}`", extra={"data": {"args": task_args}}
             )
             result = self._execute_module(
                 name,
@@ -367,7 +368,7 @@ class ComposeAction(ActionBase):
         else:
             self.log.debug(
                 f"Composing action `{name}`",
-                extra={"data": {"args": task_args}}
+                extra={"data": {"args": task_args}},
             )
             result = action.run(task_vars=task_vars)
 
