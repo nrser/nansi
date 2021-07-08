@@ -1,7 +1,6 @@
 from __future__ import annotations
 from abc import abstractmethod
 from typing import Dict, Optional
-from contextlib import contextmanager
 
 from ansible.plugins.action import ActionBase
 from ansible.errors import AnsibleError
