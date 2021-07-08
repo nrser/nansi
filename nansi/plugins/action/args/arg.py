@@ -78,7 +78,7 @@ class Arg(Prop[TValue, TInput]):
             if item_cast is None:
                 return value
             return [
-                item_cast(item, item_type, instance=item, prop=prop)
+                item_cast(item, item_type, instance=instance, prop=prop)
                 for item
                 in value
             ]
